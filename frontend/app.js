@@ -2,10 +2,10 @@ const App = new Vue({
     el: "#app",
     data() {
         return {
-            user: 'Unknown',
+            user: 'VueJS',
             text: null,
             messages: [],
-            ws: null,
+            ws: null
         }
     },
     created() {
@@ -17,9 +17,10 @@ const App = new Vue({
 
             this.ws.onopen = function() {
                 App.addSuccessNotification('Connected')
-
-                if (onOpen) 
+                
+                if (onOpen) {
                     onOpen()
+                }
             }
 
             this.ws.onerror = function() {
@@ -41,7 +42,7 @@ const App = new Vue({
             App.addMessage({color: 'red', text: text})
         },
         sendMessage() {
-
+            
             if (!this.text || !this.user)
                 return
             
@@ -54,7 +55,7 @@ const App = new Vue({
 
                 return
             }
-
+            
             this.ws.send(JSON.stringify({
                 user: this.user,
                 text: this.text,
