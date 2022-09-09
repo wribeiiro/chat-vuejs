@@ -1,23 +1,24 @@
 <?php
 
-namespace Chat;
+namespace Wribeiiro;
 
-use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use Ratchet\MessageComponentInterface;
+use \SplObjectStorage;
 
-class VueChat implements MessageComponentInterface {
-    
-    /** @var SplObjectStorage  */
-    protected $clients;
+class VueChat implements MessageComponentInterface
+{
+    protected SplObjectStorage $clients;
 
-    public function __construct() {
-        $this->clients = new \SplObjectStorage;
+    public function __construct()
+    {
+        $this->clients = new SplObjectStorage();
 
         echo "Server Started.";
     }
-   
+
     /**
-     * Undocumented function
+     * When a connection was established
      *
      * @param ConnectionInterface $conn
      * @return void
@@ -27,18 +28,20 @@ class VueChat implements MessageComponentInterface {
         $this->clients->attach($conn);
         echo "Client connected ({$conn->resourceId})" . PHP_EOL;
     }
-    
+
     /**
-     * Undocumented function
+     * When a message was sended
      *
      * @param ConnectionInterface $from
-     * @param [type] $data
+     * @param array data
      * @return void
      */
-    public function onMessage(ConnectionInterface $from, $data) {
+    public function onMessage(ConnectionInterface $from, $data)
+    {
 
         $data = json_decode($data);
         $data->date = date('d/m/Y H:i:s');
+        $data->resourceId = $from->resourceId;
 
         foreach ($this->clients as $client) {
             $client->send(json_encode($data));
@@ -46,29 +49,31 @@ class VueChat implements MessageComponentInterface {
 
         echo "Client {$from->resourceId} send a message" . PHP_EOL;
     }
-    
+
     /**
-     * Undocumented function
+     * When connection close
      *
      * @param ConnectionInterface $conn
      * @return void
      */
-    public function onClose(ConnectionInterface $conn) {
-        
+    public function onClose(ConnectionInterface $conn)
+    {
+
         $this->clients->detach($conn);
         echo "Client {$conn->resourceId} desconected" . PHP_EOL;
     }
-    
+
     /**
-     * Undocumented function
+     * When an error exists
      *
      * @param ConnectionInterface $conn
-     * @param \Exception $e
+     * @param \Exception $error
      * @return void
      */
-    public function onError(ConnectionInterface $conn, \Exception $e) {
+    public function onError(ConnectionInterface $conn, \Exception $error)
+    {
 
         $conn->close();
-        echo "Error: {$e->getMessage()}" . PHP_EOL;
+        echo "Error: {$error->getMessage()}" . PHP_EOL;
     }
 }

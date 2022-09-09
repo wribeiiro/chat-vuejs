@@ -9,63 +9,65 @@ const App = new Vue({
         }
     },
     created() {
-        this.connect()
+        this.connect();
     },
     methods: {
         connect(onOpen) {
             this.ws = new WebSocket('ws://localhost:9000');
 
-            this.ws.onopen = function() {
-                App.addSuccessNotification('Connected')
-                
+            this.ws.onopen = () => {
+                this.addSuccessNotification('Connected');
+
                 if (onOpen) {
-                    onOpen()
+                    onOpen();
                 }
             }
 
-            this.ws.onerror = function() {
-                App.addErrorNotification('Could not connect to the server')
+            this.ws.onerror = () => {
+                this.addErrorNotification('Could not connect to the server');
             }
 
-            this.ws.onmessage = function(e) {
-                App.addMessage(JSON.parse(e.data))
+            this.ws.onmessage = (message) => {
+                this.addMessage(JSON.parse(message.data));
             }
         },
         addMessage(data) {
-            this.messages.push(data)
-            App.scrollDown()
+            this.messages.push(data);
+            this.scrollDown();
         },
         addSuccessNotification(text) {
-            App.addMessage({color: 'green', text: text})
+            this.addMessage({color: 'green', text: text});
         },
         addErrorNotification(text) {
-            App.addMessage({color: 'red', text: text})
+            this.addMessage({color: 'red', text: text});
         },
         sendMessage() {
-            
-            if (!this.text || !this.user)
-                return
-            
-            if (this.ws.readyState !== this.ws.OPEN) {
-                App.addErrorNotification('Try again later');
-
-                App.connect(() => {
-                    this.sendMessage()
-                })
-
-                return
+            if (this.text.trim() === '' || !this.user) {
+                return;
             }
-            
-            this.ws.send(JSON.stringify({
-                user: this.user,
-                text: this.text,
-            }))
 
-            this.text = null
+            if (this.ws.readyState !== this.ws.OPEN) {
+                this.addErrorNotification('Try again later');
+
+                this.connect(() => {
+                    this.sendMessage();
+                });
+
+                return;
+            }
+
+            this.ws.send(
+                JSON.stringify({
+                    user: this.user,
+                    text: this.text,
+                })
+            );
+
+            this.text = null;
         },
         scrollDown() {
-            const container = this.$el.querySelector('#messages')
-            container.scrollTop = container.scrollHeight
-        },
+            const container = this.$el.querySelector('#messages');
+            container.scrollTop = container.scrollHeight;
+        }
     }
 })

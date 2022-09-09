@@ -1,8 +1,9 @@
 <?php
+
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
-use Chat\VueChat;
+use Wribeiiro\VueChat;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
