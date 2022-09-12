@@ -3,9 +3,10 @@ const App = new Vue({
     data() {
         return {
             user: 'VueJS',
-            text: null,
+            text: '',
             messages: [],
-            ws: null
+            ws: null,
+            connectionStatus: null
         }
     },
     created() {
@@ -16,7 +17,7 @@ const App = new Vue({
             this.ws = new WebSocket('ws://localhost:9000');
 
             this.ws.onopen = () => {
-                this.addSuccessNotification('Connected');
+                this.connectionStatus = 'Connected';
 
                 if (onOpen) {
                     onOpen();
@@ -24,8 +25,11 @@ const App = new Vue({
             }
 
             this.ws.onerror = () => {
-                this.addErrorNotification('Could not connect to the server');
+                this.connectionStatus = 'Could not connect to the server';
+                return;
             }
+
+            console.log(this.ws)
 
             this.ws.onmessage = (message) => {
                 this.addMessage(JSON.parse(message.data));
@@ -35,24 +39,13 @@ const App = new Vue({
             this.messages.push(data);
             this.scrollDown();
         },
-        addSuccessNotification(text) {
-            this.addMessage({color: 'green', text: text});
-        },
-        addErrorNotification(text) {
-            this.addMessage({color: 'red', text: text});
-        },
         sendMessage() {
             if (this.text.trim() === '' || !this.user) {
                 return;
             }
 
             if (this.ws.readyState !== this.ws.OPEN) {
-                this.addErrorNotification('Try again later');
-
-                this.connect(() => {
-                    this.sendMessage();
-                });
-
+                this.connectionStatus = 'Try again later';
                 return;
             }
 
@@ -63,10 +56,10 @@ const App = new Vue({
                 })
             );
 
-            this.text = null;
+            this.text = '';
         },
         scrollDown() {
-            const container = this.$el.querySelector('#messages');
+            const container = this.$el.querySelector('#conversation');
             container.scrollTop = container.scrollHeight;
         }
     }

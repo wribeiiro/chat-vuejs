@@ -25,7 +25,9 @@ class VueChat implements MessageComponentInterface
      */
     public function onOpen(ConnectionInterface $conn)
     {
+        $conn->countClient = $this->clients->count() + 1;
         $this->clients->attach($conn);
+
         echo "Client connected ({$conn->resourceId})" . PHP_EOL;
     }
 
@@ -38,16 +40,22 @@ class VueChat implements MessageComponentInterface
      */
     public function onMessage(ConnectionInterface $from, $data)
     {
-
         $data = json_decode($data);
         $data->date = date('d/m/Y H:i:s');
         $data->resourceId = $from->resourceId;
 
+        $countReceiver = count($this->clients) - 1;
+        echo sprintf(
+            'Connection %d sending message "%s" to %d other connection%s' . PHP_EOL,
+            $from->resourceId,
+            json_encode($data),
+            $countReceiver,
+            $countReceiver == 1 ? '' : 's'
+        );
+
         foreach ($this->clients as $client) {
             $client->send(json_encode($data));
         }
-
-        echo "Client {$from->resourceId} send a message" . PHP_EOL;
     }
 
     /**
@@ -58,7 +66,6 @@ class VueChat implements MessageComponentInterface
      */
     public function onClose(ConnectionInterface $conn)
     {
-
         $this->clients->detach($conn);
         echo "Client {$conn->resourceId} desconected" . PHP_EOL;
     }
