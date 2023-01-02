@@ -41,20 +41,21 @@ class VueChat implements MessageComponentInterface
     public function onMessage(ConnectionInterface $from, $data)
     {
         $data = json_decode($data);
-        $data->date = date('d/m/Y H:i:s');
+        $data->date = date('H:i');
         $data->resourceId = $from->resourceId;
+        $data = json_encode($data);
 
         $countReceiver = count($this->clients) - 1;
         echo sprintf(
             'Connection %d sending message "%s" to %d other connection%s' . PHP_EOL,
             $from->resourceId,
-            json_encode($data),
+            $data,
             $countReceiver,
             $countReceiver == 1 ? '' : 's'
         );
 
         foreach ($this->clients as $client) {
-            $client->send(json_encode($data));
+            $client->send($data);
         }
     }
 

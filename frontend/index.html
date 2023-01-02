@@ -6,16 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./app.css">
     <title>VueChat</title>
 </head>
-
 <body>
-    <div id="app" class="container mt-5">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <div class="container app">
+    <div id="app" class="container-fluid mt-5">
+        <div class="container-fluid app">
             <div class="row app-one">
-                <div class="col-sm-4 side">
+                <div class="col-sm-3 side">
                     <div class="side-one">
                         <div class="row heading">
                             <div class="col-sm-3 col-xs-3 heading-avatar">
@@ -83,7 +82,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-8 conversation">
+                <div class="col-sm-9 conversation">
                     <div class="row heading">
                         <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
                             <div class="heading-avatar-icon">
@@ -105,23 +104,8 @@
                             </div>
                         </div>
 
-                        <!--
-                        <div class="row message-body">
-                            <div class="col-sm-12 message-main-receiver">
-                                <div class="receiver">
-                                    <div class="message-text">
-                                        Hi, what are you doing?!
-                                    </div>
-                                    <span class="message-time pull-right">
-                                        Sun
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-
                         <div class="row message-body" v-for="message in messages">
-                            <div v-bind:class="'col-sm-12' + (message.resourceId % 2 === 0) ? 'message-main-sender' : 'message-main-receiver'">
+                            <div v-bind:class="message.resourceId % 2 === 0 ? 'col-sm-12 message-main-sender' : 'col-sm-12 message-main-receiver'">
                                 <div v-bind:class="(message.resourceId % 2 === 0) ? 'sender' : 'receiver'">
                                     <div class="message-text" v-if="message.text">
                                         {{ message.text }}
@@ -138,20 +122,16 @@
                         <div class="col-sm-1 col-xs-1 reply-emojis">
                             <i class="fa fa-smile-o fa-2x"></i>
                         </div>
-                        <div class="col-sm-9 col-xs-9 reply-main">
+                        <div class="col-sm-10 col-xs-10 reply-main reply-emojis">
                             <textarea class="form-control" rows="1" id="comment" placeholder="Type your favorite message" v-model="text" @keyup.enter="sendMessage"></textarea>
                         </div>
-                        <div class="col-sm-1 col-xs-1 reply-recording">
-                            <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-sm-1 col-xs-1 reply-send">
-                            <i class="fa fa-send fa-2x" aria-hidden="true" @click="sendMessage"></i>
+                        <div class="col-sm-1 col-xs-1 reply-send reply-emojis">
+                            <i class="fa fa-arrow-right fa-2x" aria-hidden="true" @click="sendMessage"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

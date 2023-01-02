@@ -14,10 +14,10 @@ const App = new Vue({
     },
     methods: {
         connect(onOpen) {
-            this.ws = new WebSocket('ws://localhost:9000');
+            this.ws = new WebSocket('ws://localhost:9001');
 
             this.ws.onopen = () => {
-                this.connectionStatus = 'Connected';
+                this.connectionStatus = `Connected`;
 
                 if (onOpen) {
                     onOpen();
@@ -28,8 +28,6 @@ const App = new Vue({
                 this.connectionStatus = 'Could not connect to the server';
                 return;
             }
-
-            console.log(this.ws)
 
             this.ws.onmessage = (message) => {
                 this.addMessage(JSON.parse(message.data));

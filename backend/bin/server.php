@@ -13,7 +13,7 @@ $server = IoServer::factory(
             new VueChat()
         )
     ),
-    9000
+    9001
 );
 
 $server->run();

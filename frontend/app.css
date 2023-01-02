@@ -10,11 +10,6 @@ span {
     box-sizing: border-box;
 }
 
-body {
-    background: url("https://www.bootdey.com/img/bgy.png") no-repeat fixed center;
-    background-size: cover;
-}
-
 .fa-2x {
     font-size: 1.5em;
 }
@@ -22,10 +17,6 @@ body {
 .app {
     position: relative;
     overflow: hidden;
-    top: 19px;
-    height: calc(100% - 38px);
-    margin: auto;
-    padding: 0;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -36,6 +27,11 @@ body {
     margin: 0;
     padding: 0;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container-fluid {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
 }
 
 .side {
@@ -73,7 +69,7 @@ body {
     margin: 0;
     height: 60px;
     width: 100%;
-    background-color: #eee;
+    background-color: #202C33;
     z-index: 1000;
 }
 
@@ -96,20 +92,20 @@ body {
 .heading-name-meta {
     font-weight: 700;
     font-size: 100%;
-    padding: 5px;
-    padding-bottom: 0;
+    margin-top: 10px;
     text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #000;
+    color: #f7f7f7;
     display: block;
+    vertical-align: middle;
 }
 
 .heading-online {
     display: none;
     padding: 0 5px;
     font-size: 12px;
-    color: #93918f;
+    color: #f7f7f7;
 }
 
 .heading-compose {
@@ -119,7 +115,7 @@ body {
 .heading-compose i {
     text-align: center;
     padding: 5px;
-    color: #93918f;
+    color: #f7f7f7;
     cursor: pointer;
 }
 
@@ -146,12 +142,8 @@ body {
     height: 100%;
     width: 100%;
     padding: 10px !important;
-    background-color: #fbfbfb;
+    background-color: #111B21;
 }
-
-/*#searchBox-inner input {
-  box-shadow: none;
-}*/
 
 .searchBox-inner input:focus {
     outline: none;
@@ -159,26 +151,32 @@ body {
     box-shadow: none;
 }
 
+#searchText {
+    background-color: #202C33;
+    color: #f7f7f7;
+    border: none;
+}
+
 .sideBar {
     padding: 0 !important;
     margin: 0 !important;
-    background-color: #fff;
+    background-color: #111B21;
     overflow-y: auto;
-    border: 1px solid #f7f7f7;
     height: calc(100% - 120px);
+    color: #fff;
 }
 
 .sideBar-body {
     position: relative;
     padding: 10px !important;
-    border-bottom: 1px solid #f7f7f7;
     height: 72px;
     margin: 0 !important;
     cursor: pointer;
+    color: #fff;
 }
 
 .sideBar-body:hover {
-    background-color: #f2f2f2;
+    background-color: #202C33;
 }
 
 .sideBar-avatar {
@@ -207,11 +205,11 @@ body {
 
 .name-meta {
     font-size: 100%;
-    padding: 1% !important;
+    margin-top: 10px !important;
     text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #000;
+    color: #f7f7f7;
 }
 
 .sideBar-time {
@@ -222,7 +220,7 @@ body {
     text-align: right;
     font-size: 12px;
     padding: 1% !important;
-    color: rgba(0, 0, 0, 0.4);
+    color: #f7f7f7;
     vertical-align: baseline;
 }
 
@@ -307,17 +305,15 @@ body {
     padding: 0 !important;
     margin: 0 !important;
     height: 100%;
-    background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/12ee6265-e947-474a-a378-6d78ab0d1117/d8fr7iz-082cab4c-3f87-47e1-b2f0-efdb504372e5.jpg/v1/fill/w_1024,h_576,q_75,strp/super_hero_whatsapp_background_by_x_ama_d8fr7iz-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTc2IiwicGF0aCI6IlwvZlwvMTJlZTYyNjUtZTk0Ny00NzRhLWEzNzgtNmQ3OGFiMGQxMTE3XC9kOGZyN2l6LTA4MmNhYjRjLTNmODctNDdlMS1iMmYwLWVmZGI1MDQzNzJlNS5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.BzcKtmJbHcafn-3f4-9tNEiybd-JbKGVeynAsEJFICI') repeat;
+    background: url('./assets/images/85ecdf1c3611ecc9b7fa85282d9526e0.jpg') repeat;
     background-size: contain;
 }
 
 .message {
     padding: 0 !important;
     margin: 0 !important;
-    background: url("w.jpg") no-repeat fixed center;
     background-size: cover;
     overflow-y: auto;
-    border: 1px solid #f7f7f7;
     height: calc(100% - 120px);
 }
 
@@ -379,23 +375,25 @@ body {
     width: auto !important;
     padding: 4px 10px 7px !important;
     border-radius: 10px 10px 10px 0;
-    background: #ffffff;
+    background: #202C33;
     font-size: 12px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     word-wrap: break-word;
     display: inline-block;
+    color: #f7f7f7;
 }
 
 .sender {
     float: right;
     width: auto !important;
-    background: #dcf8c6;
+    background: #005C4B;
     border-radius: 10px 10px 0 10px;
     padding: 4px 10px 7px !important;
     font-size: 12px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     display: inline-block;
     word-wrap: break-word;
+    color: #f7f7f7;
 }
 
 /*Reply*/
@@ -403,43 +401,22 @@ body {
 .reply {
     height: 60px;
     width: 100%;
-    background-color: #f5f1ee;
+    background-color: #202C33;
     padding: 10px 5px 10px 5px !important;
     margin: 0 !important;
     z-index: 1000;
 }
 
 .reply-emojis {
-    padding: 5px !important;
+    text-align: center;
 }
 
 .reply-emojis i {
     text-align: center;
-    padding: 5px 5px 5px 5px !important;
     color: #93918f;
     cursor: pointer;
-}
-
-.reply-recording {
-    padding: 5px !important;
-}
-
-.reply-recording i {
-    text-align: center;
-    padding: 5px !important;
-    color: #93918f;
-    cursor: pointer;
-}
-
-.reply-send {
-    padding: 5px !important;
-}
-
-.reply-send i {
-    text-align: center;
-    padding: 5px !important;
-    color: #93918f;
-    cursor: pointer;
+    font-size: 25px !important;
+    margin-top: 5px;
 }
 
 .reply-main {
@@ -466,6 +443,11 @@ body {
     box-shadow: none;
 }
 
+#comment {
+    background-color: #2A3942;
+    color: #f7f7f7;
+}
+
 @media screen and (max-width: 700px) {
     .app {
         top: 0;
@@ -475,10 +457,6 @@ body {
     .heading {
         height: 70px;
         background-color: #009688;
-    }
-
-    .fa-2x {
-        font-size: 2.3em !important;
     }
 
     .heading-avatar {
@@ -596,15 +574,6 @@ body {
 
     .reply-recording i {
         padding: 5px 0 !important;
-        font-size: 1.8em !important;
-    }
-
-    .reply-send {
-        padding: 5px 0 !important;
-    }
-
-    .reply-send i {
-        padding: 5px 2px 5px 0 !important;
         font-size: 1.8em !important;
     }
 }
