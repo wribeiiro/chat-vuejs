@@ -2,7 +2,7 @@ const App = new Vue({
     el: "#app",
     data() {
         return {
-            user: 'VueJS',
+            user: '',
             text: '',
             messages: [],
             ws: null,
@@ -10,6 +10,14 @@ const App = new Vue({
         }
     },
     created() {
+        const getUser = prompt('Please enter your username to join at chat group.');
+
+        if (getUser === null) {
+            alert('You must enter your username!');
+            window.location.reload();
+        }
+
+        this.user = getUser;
         this.connect();
     },
     methods: {
@@ -30,7 +38,8 @@ const App = new Vue({
             }
 
             this.ws.onmessage = (message) => {
-                this.addMessage(JSON.parse(message.data));
+                let data = JSON.parse(message.data);
+                this.addMessage(data);
             }
         },
         addMessage(data) {

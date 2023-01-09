@@ -6,7 +6,7 @@ use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 use \SplObjectStorage;
 
-class VueChat implements MessageComponentInterface
+class Chat implements MessageComponentInterface
 {
     protected SplObjectStorage $clients;
 
@@ -42,7 +42,6 @@ class VueChat implements MessageComponentInterface
     {
         $data = json_decode($data);
         $data->date = date('H:i');
-        $data->resourceId = $from->resourceId;
         $data = json_encode($data);
 
         $countReceiver = count($this->clients) - 1;
